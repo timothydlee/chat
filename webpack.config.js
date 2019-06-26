@@ -1,21 +1,21 @@
+const path = require('path');
 const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-const dev = Boolean(process.env.NODE_ENV !== 'production');
-
 module.exports = {
-    entry: './src/app.js',
-    mode: dev ? 'development' : 'production',
+    entry: "./src/index.js",
+    mode: "development",
     module: {
         rules: [
             {
                 test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                use: ['babel-loader']
+                exclude: /(node_modules|bower_components)/,
+                loader: "babel-loader",
+                options: { presets: ["@babel/env"] }
             },
             {
-                test: /\.(scss|css)$/,
-                use: ['style-loader', 'css-loader', 'sass-loader']
+                test: /\.css$/,
+                use: ["style-loader", "css-loader", "sass-loader"]
             },
             {
                 test: /\.(png|jpg|gif|svg)$/,
@@ -30,20 +30,20 @@ module.exports = {
             }
         ]
     },
-    resolve: {
-        extensions: ['*', '.js', '.jsx']
-    },
+    resolve: { extensions: ["*", ".js", ".jsx"] },
     output: {
-        path: __dirname + '/dist',
-        publicPath: '/',
-        filename: 'bundle.js'
+        path: path.resolve(__dirname, "dist/"),
+        publicPath: "/dist/",
+        filename: "bundle.js"
+    },
+    devServer: {
+        contentBase: path.join(__dirname, "public/"),
+        port: 3000,
+        publicPath: "http://localhost:3000/dist",
+        hotOnly: true
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new CleanWebpackPlugin,
-    ],
-    devServer: {
-        contentBase: './dist',
-        hot: true
-    }
-};
+        new CleanWebpackPlugin
+    ]
+}
