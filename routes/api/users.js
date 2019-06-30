@@ -24,9 +24,10 @@ router.post('/', [
         const { name, email, password } = req.body;
 
         try {
-
             // See if user exists
             let user = await User.findOne({ email });
+
+            // If user exists, we return an error in the same format as the express-validator error format.
             if (user) {
                 return res.status(400).json({ errors: [{ msg: 'User already exists' }] });
             }
