@@ -6,6 +6,9 @@ const PORT = process.env.PORT || 5000;
 // Connect Database
 connectDB();
 
+// Initializing Middleware
+app.use(express.json({ extended: false }));
+
 app.listen(PORT, () => console.log(`Server started on port: ${PORT}`));
 app.get('/', (req, res) => res.send(`API running`));
 
