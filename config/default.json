@@ -1,3 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://tim:xBJDZbkZs0YBaOK9Bf4eZ3dbN3kXiv@prime-amu6p.mongodb.net/test?retryWrites=true&w=majority"
+    "mongoURI": "mongodb+srv://tim:xBJDZbkZs0YBaOK9Bf4eZ3dbN3kXiv@prime-amu6p.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "mySecretToken"
 }
